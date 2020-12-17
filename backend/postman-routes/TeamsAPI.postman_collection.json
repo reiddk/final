@@ -1,0 +1,197 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TeamsAPI",
+		"_postman_id": "fb9dff8c-01bf-c8b3-0ffe-f0ac77b0b966",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List All Coaches with options",
+			"request": {
+				"url": "{{host}}:{{port}}/{{coachApi}}/?sort_cols=first_name,id&sort_dirs=dsc,asc&limit=4&offset=1&first_name=like:test",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "List All Players with options",
+			"request": {
+				"url": "{{host}}:{{port}}/{{playersApi}}/?sort_col=first_name,id&sort_dir=asc,asc&limit=4&offset=1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "List All Teams with options",
+			"request": {
+				"url": "{{host}}:{{port}}/{{teamsApi}}/?name=like:raptors",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get One Coach",
+			"request": {
+				"url": "{{host}}:{{port}}/{{coachApi}}/{{ItemId}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get One Player",
+			"request": {
+				"url": "{{host}}:{{port}}/{{playersApi}}/{{playerId}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get One Team",
+			"request": {
+				"url": "{{host}}:{{port}}/{{teamsApi}}/{{ItemId}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Team",
+			"request": {
+				"url": "{{host}}:{{port}}/{{teamsApi}}/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Sweet Team2\", \r\n\"coach_id\":2,\r\n\"league_id\": 2,\r\n\"notes\": \"my new notes\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Player",
+			"request": {
+				"url": "{{host}}:{{port}}/{{playersApi}}/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"first_name\":\"Gabe\",\n  \"last_name\":\"jenson\",\n \"phone\":\"8181818\",\n   \"person_type\":\"player\",\n  \"address1\":\"1527 N. 230 w.\",\n  \"address2\":\"jenson\",\n  \"city\":\"Orem\",\n  \"state\": \"UT\",\n  \"zip\": \"84556\",\n\"team_id\": 1,\n  \"notes\":\"lladfj alfa lfaja slfaj s\",\n  \"email\":\"kenneth3.jenson@gmail.com\",\n  \"password\":\"password\",\n  \"user_name\":\"kjenson\",\n  \"license_level_id\":1\n  \n}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Coach",
+			"request": {
+				"url": "{{host}}:{{port}}/{{coachApi}}/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"first_name\":\"Gabe\",\n  \"last_name\":\"jenson\",\n \"phone\":\"81818181\",\n   \"person_type\":\"coach\",\n  \"address1\":\"1527 N. 230 w.\",\n  \"address2\":\"jenson\",\n  \"city\":\"Orem\",\n  \"state\": \"UT\",\n  \"zip\": \"84556\",\n\"team_id\": 1,\n  \"notes\":\"lladfj alfa lfaja slfaj s\",\n  \"email\":\"kenneth2.jenson@gmail.com\",\n  \"password\":\"password\",\n  \"user_name\":\"kjenson\",\n  \"license_level_id\":1\n  \n}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Player",
+			"request": {
+				"url": "{{host}}:{{port}}/{{playersApi}}/{{playerId}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"first_name\":\"Gabe\",\n  \"last_name\":\"jenson\",\n \"phone\":\"81818181\",\n   \"person_type\":\"player\",\n  \"address1\":\"1527 N. 230 w.\",\n  \"address2\":\"jenson\",\n  \"city\":\"Orem\",\n  \"state\": \"UT\",\n  \"zip\": \"84556\",\n\"team_id\": 1,\n  \"notes\":\"lladfj alfa lfaja slfaj s\",\n  \"email\":\"kenneth3.jenson@gmail.com\",\n  \"password\":\"password\",\n  \"user_name\":\"kjenson\",\n  \"license_level_id\":1\n  \n}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Coach",
+			"request": {
+				"url": "{{host}}:{{port}}/{{coachApi}}/{{ItemId}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"first_name\":\"Gabe\",\n  \"last_name\":\"jenson\",\n \"phone\":\"81818181\",\n   \"person_type\":\"coach\",\n  \"address1\":\"1527 N. 230 w.\",\n  \"address2\":\"jenson\",\n  \"city\":\"Orem\",\n  \"state\": \"UT\",\n  \"zip\": \"84556\",\n\"team_id\": 1,\n  \"notes\":\"lladfj alfa lfaja slfaj s\",\n  \"email\":\"kenneth2.jenson@gmail.com\",\n  \"password\":\"password\",\n  \"user_name\":\"kjenson\",\n  \"license_level_id\":1\n  \n}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Team",
+			"request": {
+				"url": "{{host}}:{{port}}/{{teamsApi}}/{{ItemId}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Firebirds\", \n\"coach_id\":1,\n\"league_id\": 1,\n\"notes\": \"my new notes\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

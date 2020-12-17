@@ -1,0 +1,44 @@
+<!-- Form Rendering Lodash Template 
+Not required, but here's a starter if you want to tackle the extra credit
+-->
+
+<form id="<%=view.getObjectValue(view, ['viewModel', 'form', 'id'])%>">
+
+    <h1><%=view.getObjectValue(view, ['viewModel', 'form', 'formTitle']) %></h1>
+
+    <% _.forEach(view.getObjectValue(view, ['viewModel', 'fields']), function(field)
+    { %>
+    <div class="form-group">
+       <% if (field.hidden !== true) { %>
+        <label><%=field.label %> </label>
+        <% } %>
+     <% if(field.inputType == "select") { 
+            let options=view.getObjectValue(view, ['storage', 'lookups', field.lookupName]);
+            %>
+        <select class="form-control" name="<%=field.name %>">
+            <option value="<%=view.getObjectValue(field, ['defaultVal']) %>"><%=field.placeholder %></option>
+         <% _.forEach(options, function(option)
+            { %>
+                
+       <% if ( view.getObjectValue(data, [field.name]) == view.getObjectValue(option, ['value'])) { %>
+        <option selected value="<%=option.value %>"><%=view.getObjectValue(option, ['label']) %></option>
+        <% } %>
+        
+        <% if (view.getObjectValue(data, [field.name]) != view.getObjectValue(option, ['value'])) { %>
+        <option value="<%=view.getObjectValue(option, ['value']) %>"><%=view.getObjectValue(option, ['label']) %></option>
+        <% } %>
+            
+            <% })%> 
+         </select>
+    <%} 
+    else if (field.hidden === true) { %>
+        <input type="text" class="form-control" style="display:none;" value="<%=view.getObjectValue(data, [field.name]) %>" name="<%=field.name %>"  />
+        <% } 
+    else { %>
+            <input placeholder="<%=field.placeholder %>" type="<%= field.inputType %>" class="form-control" value="<%=view.getObjectValue(data, [field.name]) %>" name="<%=field.name %>" />
+        <% } %>
+        <div class="error-message alert alert-danger" style="display:none;"></div>
+    </div>
+    <% })%>
+    <input type=submit style="display:none;">
+</form>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <title>Bootstrap npm starter</title>
+  </head>
+  <body>
+    <div class="background-image">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Soccerball.svg/500px-Soccerball.svg.png"
+      />
+    </div>
+    <div class="">
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#"
+            >Soccer Table
+            <img
+              style="height: 30px"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Soccerball.svg/500px-Soccerball.svg.png"
+          /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Link 1</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link 2</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link 3</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      
+      <div class="row" style="margin-top: 50px">
+        <div class="offset-lg-2 col-lg-8">
+          <div class="my-container">
+            <div class="row">
+              <div class="col-md-3 col-sm-4">
+                <button class="btn btn-primary" onclick="theApp.reloadTeamData()">Reload Team Data</button>
+              </div>
+              <div class="col-md-3 col-sm-4">
+                <button class="btn btn-warning" onclick="theApp.clearTeamData()">Clear Team Data</button>
+              </div>
+              <div class="col-md-6 col-sm-8">
+                <div class="md-form mt-0">
+                <input onkeyup="theApp.filterTable(this)" class="form-control" type="text" placeholder="Search" aria-label="Search">
+              </div>
+            </div>
+            </div>
+            <div class="row table-data-wrapper">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col" hidden>id</th>
+                    <th scope="col"></th>
+                    <th scope="col " class="" >
+                      <div class="column-header-info clickable" onclick="theApp.sortData('name')">Team Name</div>
+                      <div class="column-header-info">
+                        <i class="fa fa-caret-up sorter clickable" id="name-sorter-asc" aria-hidden="true" onclick="theApp.sortData('name', 'asc')"></i>
+                        <i class="fa fa-caret-down sorter clickable" id="name-sorter-desc" aria-hidden="true" onclick="theApp.sortData('name', 'desc')"></i>
+                      </div>
+                    </th>
+                    <th scope="col " class="">
+                      <div class="column-header-info clickable"  onclick="theApp.sortData('league')">League/Level</div>
+                      <div class="column-header-info">
+                        <i class="fa fa-caret-up sorter clickable" id="league-sorter-asc" aria-hidden="true" onclick="theApp.sortData('league', 'asc')"></i>
+                        <i class="fa fa-caret-down sorter clickable" id="league-sorter-desc" aria-hidden="true" onclick="theApp.sortData('league', 'desc')"></i>
+                      </div></th>
+                      <th scope="col " class="">
+                        <div class="column-header-info clickable" onclick="theApp.sortData('division')">Division</div>
+                        <div class="column-header-info">
+                          <i class="fa fa-caret-up sorter clickable" id="division-sorter-asc" aria-hidden="true" onclick="theApp.sortData('division', 'asc')"></i>
+                          <i class="fa fa-caret-down sorter clickable" id="division-sorter-desc" aria-hidden="true" onclick="theApp.sortData('division', 'adescsc')"></i>
+                        </div></th>
+                    <th scope="col " class="">
+                      <div class="column-header-info clickable" onclick="theApp.sortData('coach.firstName')">Coach Name</div>
+                      <div class="column-header-info">
+                        <i class="fa fa-caret-up sorter clickable" id="coach-firstName-sorter-asc" aria-hidden="true" onclick="theApp.sortData('coach.firstName', 'asc')"></i>
+                        <i class="fa fa-caret-down sorter clickable" id="coach-firstName-sorter-desc" aria-hidden="true" onclick="theApp.sortData('coach.firstName', 'desc')"></i>
+                      </div></th>
+                    <th scope="col " class="">
+                      <div class="column-header-info clickable"  id="num-players" onclick="theApp.sortData('numPlayers')"></div>
+                      <div class="column-header-info">
+                        <i class="fa fa-caret-up sorter clickable" id="numPlayers-sorter-asc" aria-hidden="true" onclick="theApp.sortData('numPlayers', 'asc')"></i>
+                        <i class="fa fa-caret-down sorter clickable" id="numPlayers-sorter-desc" aria-hidden="true" onclick="theApp.sortData('numPlayers', 'desc')"></i>
+                      </div></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody id="data-table"></tbody>
+              </table>
+            </div>
+            <div class="row">
+              <button class="btn btn-primary" onclick="theApp.editRow()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add Team</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <aside>
+            <h4>This is a simple app for displaying soccer team data</h4>
+            <p>
+              I actually have no idea what the boilerplate application was that
+              the teacher referred to.
+            </p>
+            <p>
+              So I'm just hoping I didn't miss something big from that
+              boilerplate
+            </p>
+          </aside>
+        </div>
+      </div>
+
+      <footer>
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+          © 2020 Copyright:
+          <a href="#"> Reid</a>
+          <p>There is no copyright</p>
+        </div>
+        <!-- Copyright -->
+      </footer>
+    </div>
+
+    
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content slideIn">
+          <div class="modal-header">
+            <h5 class="edit-team-title" id="exampleModalLabel"><span id="edit-or-show"></span> <span id="team-name-to-edit"></span></h5>
+            <button
+              type="button"
+              class="close close-modal-false"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="editRowForm" class="needs-validation" novalidate>
+          <div class="edit-team-body container">
+            <div class="separator">Team Info</div>
+            <div class="form-group" style="display:none;">
+              <label for="id">Team Id</label>
+              <input type="number" class="form-control" name="id" id="id"  placeholder="Enter id">
+            </div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="name">Team Name</label>
+              </div>
+              <div class="col-9">              
+                <input type="text" class="form-control" name="name" id="name" placeholder="Enter name">
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="name-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="league">League</label>
+              </div>
+              <div class="col-9">              
+                <select class="form-control" name="league" id="league"></select>
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="league-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="division">Division</label>
+              </div>
+              <div class="col-9">              
+                <select class="form-control" name="division" id="division"></select>
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="division-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="numPlayers"># players</label>
+              </div>
+              <div class="col-9">              
+                <input type="number" min="0" max="30" class="form-control" name="numPlayers" id="numPlayers" placeholder="Number of Players">
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="numPlayers-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="logo">Logo URL</label>
+              </div>
+              <div class="col-9">              
+                <input type="url" min="0" max="30" class="form-control" name="logo" id="logo" pattern="https://.*" placeholder="https://awesometeamlogo.com/yourteam.jpg">
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="logo-Err" role="alert"></div>
+            <div class="separator">Coach Info</div>
+            <div class="form-group" style="display:none;">
+              <label for="coachID">Coach Id</label>
+              <input type="number" class="form-control" name="coachID" id="coachID"  placeholder="Enter id">
+            </div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="licenseLevel">License</label>
+              </div>
+              <div class="col-9">              
+                <select class="form-control" name="licenseLevel" id="licenseLevel"></select>
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="licenseLevel-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="firstName">First Name</label>
+              </div>
+              <div class="col-9">              
+                <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter First Name">
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="firstName-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="lastName">Last Name</label>
+              </div>
+              <div class="col-9">              
+                <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Enter Last Name">
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="lastName-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="address">Address</label>
+              </div>
+              <div class="col-9">              
+                <input type="text" class="form-control" name="address" id="address" placeholder="Enter Address">
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="address-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="city">City</label>
+              </div>
+              <div class="col-9">              
+                <input type="text" class="form-control" name="city" id="city" placeholder="Enter City">
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="city-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="state">State</label>
+              </div>
+              <div class="col-9">              
+                <input type="text" maxlength="2" class="form-control"  name="state" id="state" placeholder="Enter State">
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="state-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="zip">Zip</label>
+              </div>
+              <div class="col-9">              
+                <input type="text" class="form-control"  name="zip" id="zip" placeholder="Enter Zip code">
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="zip-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="email">Email</label>
+              </div>
+              <div class="col-9">              
+                <input type="email" class="form-control"  name="email" id="email" placeholder="Enter Email" required>
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="email-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="phone">Phone</label>
+              </div>
+              <div class="col-9">              
+                <input type="text" class="form-control"  name="phone" id="phone" placeholder="Enter Phone Number">
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="phone-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="userName">User name</label>
+              </div>
+              <div class="col-9">              
+                <input type="text" class="form-control"  name="userName" id="userName" placeholder="Enter your user name">
+              </div>
+            </div>
+
+            <div class="alert alert-danger hidden" id="userName-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="password">Password</label>
+              </div>
+              <div class="col-9">              
+                <input type="password" class="form-control"  name="password" id="password" placeholder="Enter Password">
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="password-Err" role="alert"></div>
+            <div class="form-group row">
+              <div class="col-3 form-label" >
+                <label for="passwordAgain">Confirm</label>
+              </div>
+              <div class="col-9">              
+                <input type="password" class="form-control"  name="passwordAgain" id="passwordAgain" placeholder="Confirm Password">
+              </div>
+            </div>
+            <div class="alert alert-danger hidden" id="passwordAgain-Err" role="alert"></div>
+          </div>
+          <div class="edit-team-footer">
+            <button
+              type="button"
+              class="btn btn-secondary close-modal-false"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary" style="margin-left:10px;">
+              Save changes
+            </button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="questionModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content slideIn">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
+            <button
+              type="button"
+              class="close close-modal-false"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            If you're seeing this modal after clicking the button on the page,
+            Bootstrap's CSS and JS are both working properly.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary close-modal-false"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary close-modal-true">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade show" style="display: none"></div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script><script src="https://unpkg.com/jquery-input-mask-phone-number@1.0.14/dist/jquery-input-mask-phone-number.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+    <script src="/api/lms2Data.js"></script>
+    <script type="module" src="js/validation.js"></script>
+    <script src="js/storageService.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

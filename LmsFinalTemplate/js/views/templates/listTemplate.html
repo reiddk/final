@@ -1,0 +1,55 @@
+<!--List Rendering Lodash Template
+'view'- represents the Player or Team View Object
+'view.viewModel'-represents the Player or Team ViewModel objects
+'view.viewModel.data'-represents the returned data from the list call
+'view.getFieldValue(..)'-function in view that returns the field value for display
+-->
+<div class="tableHead row">
+  <div class="col-8">
+    <h1> <%=view.viewModel.list.listTitle%> </h1>
+  </div>
+  <div class="col-4 button-wrapper">
+    <button id="" class="btn btn-primary <%=view.viewModel.form.id %>-create" > Create </button>
+  </div>
+  
+  
+
+</div>
+<table id='table' class="<%=view.viewModel.list.tableClasses%>">
+
+  <tr class="trow">
+    <!-- create the headers -->
+    <% _.forEach(view.viewModel.fields, function(value, key){
+        
+         if (value.name != "id" && value.list) {%>
+    <th class="thead sortable" data-name="<%=value.name%>"> <%=value.label%> </th>
+    <%}}) %>
+    <th class="thead"> Actions </th>
+  </tr>
+
+  <!--TODO create the rows from the data-->
+  <!-- You can utilize the getFieldValue function from 'view' 
+        to get the field display values-->
+
+        <% _.forEach(view.viewModel.data, function(data){%>
+        <tr id="<%=view.viewModel.form.id %>-<%=data.id %>">
+          <!-- create the headers -->
+          <% _.forEach(view.viewModel.fields, function(field, key){
+          if (field.name != "id" && field.list) {
+            if (field.lookupName) {%>
+              <td class=""> <%= view.getLookup(field.lookupName, data[field.name]) %> </td>
+             <%}
+             if (!field.lookupName) {%>
+              <td class=""> <%=data[field.name]%> </td>
+              <%} %>
+
+
+           <%}}) %>
+          <td>
+            <button class="btn btn-danger <%=view.viewModel.form.id %>-delete" data-id="<%=data.id %>" ><i class="fa fa-minus-circle" aria-hidden="true"></i> Delete</button>
+            <button class="btn btn-secondary <%=view.viewModel.form.id %>-edit" data-id="<%=data.id %>" type="button" ><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+            <button class="btn btn-info <%=view.viewModel.form.id %>-info" data-id="<%=data.id %>" type="button" ><i class="fa fa-info-circle" aria-hidden="true"></i> Info</button>
+          </td>
+        </tr>
+        <%}) %>
+</table>

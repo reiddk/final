@@ -1,0 +1,20 @@
+
+
+<div class="container-fluid">
+          <!-- create the headers -->
+          <% _.forEach(view.viewModel.fields, function(field, key){
+          if (field.name != "id") {%>
+            <div class="row">
+                <div class="col-4"><%=field.label%></div>
+                
+           <% if (field.lookupName) {%>
+              <div class="col-8"><%=view.getLookup(field.lookupName, data[field.name]) %></div>
+             <%}
+             if (!field.lookupName) {%>
+              <div class="col-8"><%=data[field.name]%></div>
+              <%} %>
+                
+            </div>
+            <hr/>
+          <%}}) %>
+</div>
