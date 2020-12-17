@@ -99,7 +99,7 @@
            
            $(document).ready(function() {
               var controller = new AppController(playerViewModel,teamViewModel,
-                "tableHolder", "formHolder", "localhost:8080");
+                "tableHolder", "formHolder", "myteams-env.eba-dhzjz24q.us-east-2.elasticbeanstalk.com");
               controller.renderTeamListView();
               $('#edit-teams').click(() => { controller.renderTeamListView(); });
               $('#edit-players').click(() => { controller.renderPlayerListView(); });
